@@ -2,16 +2,16 @@
 
 vimfilelocation="/home/$(whoami)/.vimrc"
 
-
+rcexistsval=-1
 rcfileisexists () {
 	if [ -f "$vimfilelocation" ]; then
-		return 1
+		rcexistsval=1
 	else
-		return 0
+		rcexistsval=0
 	fi
 }
 rcfileisexists
-if [ "$?" = "0" ]; then
+if [ $rcexistsval -eq 0 ]; then
 	touch "$vimfilelocation"
 	echo "call plug#begin()
 	Plug 'jacoborus/tender.vim'
@@ -33,7 +33,7 @@ call plug#end()
 	set softtabstop=4
 	set expandtab" >> "$vimfilelocation"
 	echo "Vimfile is created successfully!"
-elif [ "$?" = "1" ]; then
+elif [ $rcexistsval -eq 1 ]; then
 	echo "Vimfile is already exist! Do you want to remove(1) or rename(2) it?"
 	read -p "Inputs: '1' for remove, '2' for rename: " vimfile
 

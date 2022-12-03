@@ -4,10 +4,7 @@ VIMFILELOCATION=/home/$(whoami)/.vimrc
 PATHTOSWAPS=/home/$(whoami)/.cache/vim/swap
 RCEXISTSVAL=-1
 
-
-
-
-rcfileisexists () {
+rcfileisexists() {
 	if [ -f "$VIMFILELOCATION" ]; then
 		RCEXISTSVAL=1
 	else
@@ -35,7 +32,7 @@ call plug#end()
 	set tabstop=4
 	set shiftwidth=4
 	set softtabstop=4
-	set expandtab" >> "$VIMFILELOCATION"
+	set expandtab" >>"$VIMFILELOCATION"
 	echo "Vimfile is created successfully!"
 elif [ $RCEXISTSVAL -eq 1 ]; then
 	echo "Vimfile is already exist! Do you want to remove(1) or rename(2) it?"
@@ -58,16 +55,16 @@ elif [ $RCEXISTSVAL -eq 1 ]; then
 fi
 
 if [ ! -d "$PATHTOSWAPS" ]; then
-    echo "'${PATHTOSWAPS}' does not exist! Do you want to create one? [y/N]"
-		read create
-		if [ -z "$create" ]; then
-			create="N"
-		fi
-		if [ "${create^}" = "Y" ]; then
-			mkdir -p $PATHTOSWAPS
-		elif [ "${create^}" = "N" ]; then
-			exit
-		else
-			echo "Correct inputs: 'y or Y' =yes, 'n or N' =no!"
-		fi
+	echo "'${PATHTOSWAPS}' does not exist! Do you want to create one? [y/N]"
+	read create
+	if [ -z "$create" ]; then
+		create="N"
+	fi
+	if [ "${create^}" = "Y" ]; then
+		mkdir -p $PATHTOSWAPS
+	elif [ "${create^}" = "N" ]; then
+		exit
+	else
+		echo "Correct inputs: 'y or Y' =yes, 'n or N' =no!"
+	fi
 fi
